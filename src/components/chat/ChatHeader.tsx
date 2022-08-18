@@ -1,7 +1,9 @@
+import s from './header.module.css'
+
 export const ChatHeader = () => {
     return (
-        <div>
-            
+        <div className={s.header}>
+
         </div>
     )
 }

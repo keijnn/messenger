@@ -1,11 +1,10 @@
-import { $message } from '@/features/api/response'
-import { useUnit } from "effector-react"
+//import components
+import { Home } from '@/pages/Home'
 
 export const App = () => {
-  const joke = useUnit($message)
   return (
-    <div className="bg-[red]">
-      123
+    <div className='w-screen h-screen overflow-hidden'>
+      <Home />
     </div>
   )
 }
