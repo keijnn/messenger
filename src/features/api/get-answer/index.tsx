@@ -13,4 +13,3 @@ export const $joke = createStore<string>('').on(
 
 getJackMessageFx()
 
-$joke.watch((state) => console.log(state))

@@ -11,6 +11,7 @@ export const NewMessage = () => {
         />
         <img
           src={Send}
+          alt="send"
           className="ml-4 h-3/6"
         />
       </span>

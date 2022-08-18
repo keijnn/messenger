@@ -21,25 +21,24 @@ const sendMessageFx = createEffect(
     if (!response.ok) throw response
   }
 )
-
-const getUserId = createEvent<number>()
-const sendedMessage = createEvent<Message>()
-
-export const $message = restore(sendedMessage, {
-  value: '123',
-})
+export const getUserId = createEvent<number>()
+export const sendedMessage = createEvent<Message>()
+export const $userId = restore<number>(getUserId, 0)
 
 sample({
-  clock: getUserId,
-  source: sendedMessage,
-  fn: (message, id) => ({ message, id }),
+  clock: sendedMessage,
+  source: getUserId,
+  fn: (id, message) => ({ id, message }),
   target: sendMessageFx,
 })
 
+getUserId(1)
+
 sendedMessage({
-  value: '123123',
+  value: '123assdfd123',
+  status: 'friend'
 })
 
-getUserId(1)
+
 
 

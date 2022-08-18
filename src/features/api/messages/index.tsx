@@ -1,4 +1,4 @@
-import { restore, createEffect } from 'effector'
+import { restore, createEffect} from 'effector'
 import { User } from '@/types/Messages'
 
 const getMessagesFx = createEffect( async () => {
@@ -10,5 +10,3 @@ const getMessagesFx = createEffect( async () => {
 export const $users = restore<User[]>(getMessagesFx, [])
 
 getMessagesFx()
-
-$users.watch(data => console.log(data))
