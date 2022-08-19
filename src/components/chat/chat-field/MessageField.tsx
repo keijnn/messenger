@@ -5,7 +5,9 @@ import { useUnit } from 'effector-react'
 export const MessageField = () => {
   const userId = useUnit($userId)
   const users = useUnit($users)
-  
+
+  console.log(users)
+
   const messages = users.map((user, index) => {
     if (user.id === userId) {
       return (
@@ -13,7 +15,7 @@ export const MessageField = () => {
           key={index}
           className="h-full flex flex-col-reverse overflow-auto py-3"
         >
-          {user.messages.reverse().map((item, index) => (
+          {user.messages.map((item, index) => (
             <div key={index} className="mb-6 flex w-full">
               {item.status === 'friend' ? (
                 <div className="flex ml-3 justify-start">
@@ -28,7 +30,7 @@ export const MessageField = () => {
                 </div>
               ) : (
                 <div className="flex w-full mr-3 justify-end">
-                  <p className="ml-3 h-12 flex items-center px-3 self-end text-right w-fit rounded-full bg-gray-500">
+                  <p className="ml-3 h-12 flex items-center px-3 self-end text-right w-fit rounded-full bg-gray-300">
                     {item.value}
                   </p>
                 </div>

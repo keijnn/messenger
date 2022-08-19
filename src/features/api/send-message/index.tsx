@@ -32,12 +32,6 @@ sample({
   target: sendMessageFx,
 })
 
-getUserId(1)
-
-sendedMessage({
-  value: '123assdfd123',
-  status: 'friend'
-})
 
 
 

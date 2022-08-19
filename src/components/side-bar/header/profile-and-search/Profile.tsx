@@ -1,5 +1,7 @@
+import ProfileAvatar from '@/assets/icons/profile-user.svg'
+
 export const Profile = () => (
-    <div>
-        
-    </div>
+  <div>
+    <img className="w-1/12" src={ProfileAvatar} alt="ava" />
+  </div>
 )
