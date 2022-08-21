@@ -7,3 +7,17 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
+::-webkit-scrollbar {
+    width: 3px;
+    background:lightgray;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 15px;
+    background:cyan;
+}

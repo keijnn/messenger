@@ -1,6 +1,7 @@
 export interface Message {
-    value: string,
-    status?: string
+  value: string
+  status?: boolean
+  date: string
 }
 
 export interface User {

@@ -1,33 +1,38 @@
 import s from './new-message.module.css'
 import Send from '@/assets/icons/send.svg'
-import { sendedMessage } from '@/features/api/send-message'
-import { getAllMessages } from '@/features/api/messages'
-import { useState, useEffect, ChangeEvent, KeyboardEventHandler } from 'react'
+import { sendedMessage, $userId } from '@/features/api/send-message'
+import { $filter, getAllMessages } from '@/features/api/messages'
+import { useState, ChangeEvent } from 'react'
+import { useUnit } from 'effector-react'
 
 export const NewMessage = () => {
-
+  const userId = useUnit($userId)
+  const filter = useUnit($filter)
   const [messageValue, setMessageValue] = useState<string>('')
 
-  const getMessageValue = (e:ChangeEvent<HTMLInputElement>) => {
+  const getMessageValue = (e: ChangeEvent<HTMLInputElement>) => {
     setMessageValue(e.target.value)
   }
 
   const messageSended = () => {
     getAllMessages()
-    messageValue ? sendedMessage({
-      value: messageValue,
-      status: 'user',
-    }) : null
+    messageValue
+      ? sendedMessage({
+          value: messageValue,
+          status: true,
+          date: new Date().toLocaleString(),
+        })
+      : null
     setMessageValue('')
   }
 
-    const listener = (e:any) => {
-      if (e.key === 'Enter') {
-        messageSended()
-      }
+  const listener = (e: any) => {
+    if (e.key === 'Enter') {
+      messageSended()
     }
+  }
 
-  return (
+  return userId && !filter ? (
     <div className={s.bg}>
       <span className="px-6 h-3/6 outline-none rounded-full w-full bg-white flex items-center">
         <input
@@ -45,8 +50,5 @@ export const NewMessage = () => {
         />
       </span>
     </div>
-  )
+  ) : null
 }
-
-
-

@@ -1,38 +1,48 @@
-import { $users } from '@/features/api/messages'
+import { $users, $filter } from '@/features/api/messages'
 import { $userId } from '@/features/api/send-message'
 import { useUnit } from 'effector-react'
 
 export const MessageField = () => {
   const userId = useUnit($userId)
   const users = useUnit($users)
-
-  console.log(users)
+  const filter = useUnit($filter)
 
   const messages = users.map((user, index) => {
     if (user.id === userId) {
       return (
         <div
           key={index}
-          className="h-full flex flex-col-reverse overflow-auto py-3"
+          className="h-full flex flex-col-reverse overflow-auto p-3"
         >
           {user.messages.map((item, index) => (
             <div key={index} className="mb-6 flex w-full">
-              {item.status === 'friend' ? (
+              {!item.status ? (
                 <div className="flex ml-3 justify-start">
                   <img
-                    className="rounded-full w-12"
+                    className="rounded-full h-12 w-12"
                     src={user.avatar}
                     alt="ava"
                   />
-                  <p className="ml-3 h-12 flex items-center px-3 text-white text-left rounded-full bg-zinc-700">
-                    {item.value}
-                  </p>
+                  <div className="px-3">
+                    <p className=" min-h-12 flex items-center px-5 py-2 text-white text-left rounded-full bg-zinc-700">
+                      {item.value}
+                    </p>
+                    <p className="mt-2 ml-2 text-sm text-gray-600">
+                      {item.date}
+                    </p>
+                  </div>
                 </div>
               ) : (
                 <div className="flex w-full mr-3 justify-end">
-                  <p className="ml-3 h-12 flex items-center px-3 self-end text-right w-fit rounded-full bg-gray-300">
-                    {item.value}
-                  </p>
+                  <div className="flex flex-col items-end px-3">
+                    <p className=" min-h-12 flex items-center px-5 py-2 self-end text-right w-fit rounded-full bg-gray-300">
+                      {item.value}
+                    </p>
+
+                    <p className="text-sm mt-2 mr-2  text-gray-600">
+                      {item.date}
+                    </p>
+                  </div>
                 </div>
               )}
             </div>
@@ -42,6 +52,8 @@ export const MessageField = () => {
     }
   })
   return (
-    <div className="h-full overflow-auto">{messages ? messages : null}</div>
+    <div className="h-full overflow-auto">
+      {messages && !filter ? messages : null}
+    </div>
   )
 }

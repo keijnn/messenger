@@ -1,12 +1,13 @@
 import s from './header.module.css'
 import { $userId } from '@/features/api/send-message'
-import { $users } from '@/features/api/messages'
+import { $users, $filter } from '@/features/api/messages'
 import { useUnit } from 'effector-react'
 
 export const ChatHeader = () => {
 
     const users = useUnit($users)
     const userId = useUnit($userId)
+    const filter = useUnit($filter)
 
     const userProfile = users.map(user => {
         if (user.id === userId) {
@@ -23,5 +24,5 @@ export const ChatHeader = () => {
         }
     })
 
-    return <div className={s.header}>{userProfile}</div>
+    return <div className={s.header}>{!filter ? userProfile : null}</div>
 }
