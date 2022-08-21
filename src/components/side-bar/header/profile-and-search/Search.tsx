@@ -12,7 +12,7 @@ export const Search = () => {
 
   return (
     <>
-      <span className="flex items-center bg-white rounded-full text-gray-700 p-2">
+      <span className="flex mb-3 items-center bg-white rounded-full text-gray-700 p-2">
         <img className="w-4" src={SearchIcon} alt="icon" />
         <input
           onChange={(e) => usersFiltered(e.target.value)}
