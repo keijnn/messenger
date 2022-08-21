@@ -1,10 +1,14 @@
-import SearchIcon from '@/assets/icons/search.svg'
-import { usersFiltered, $filter } from '@/features/api/messages'
+//import modules
 import { useUnit } from 'effector-react'
-import { ChangeEvent, useEffect, useState } from 'react'
+
+//import components
+import { usersFiltered, $filter } from '@/features/api/messages'
+
+//import icons
+import SearchIcon from '@/assets/icons/search.svg'
 
 export const Search = () => {
-  const filter = useUnit($filter)
+  const filter = useUnit($filter) //filtered users
 
   return (
     <>

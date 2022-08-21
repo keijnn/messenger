@@ -1,20 +1,22 @@
-import { $users, $filter, usersFiltered } from '@/features/api/messages'
-import { useUnit } from "effector-react"
-import { Title } from "./Title"
-import { getUserId } from '@/features/api/send-message'
+//import modules
+import { useUnit } from 'effector-react'
 
+//import components
+import { Title } from './Title'
+import { getUserId } from '@/features/api/send-message'
+import { $users, $filter, usersFiltered } from '@/features/api/messages'
 
 export const UserList = () => {
-    const users = useUnit($users)
-    const filter = useUnit($filter)
-    const filtered = users.filter((user) =>
-      user.name.toLowerCase().includes(filter.toLowerCase())
-    )
+  const users = useUnit($users) //all users
+  const filter = useUnit($filter) //filtered users
+  const filtered = users.filter((user) =>
+    user.name.toLowerCase().includes(filter.toLowerCase())
+  ) //filter function
 
   const usersList = filtered.map((user) => (
     <div
       key={user.id}
-      onClick={() => { 
+      onClick={() => {
         getUserId(user.id)
         usersFiltered('')
       }}
@@ -28,11 +30,9 @@ export const UserList = () => {
     </div>
   ))
   return (
-    <div className="w-full h-full overflow-auto px-2">
+    <div className="w-full h-5/6 overflow-auto px-2">
       <Title />
       {usersList ? usersList : null}
     </div>
   )
 }
-
-

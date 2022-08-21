@@ -1,11 +1,14 @@
-import { $users, $filter } from '@/features/api/messages'
-import { $userId } from '@/features/api/send-message'
+//import modules
 import { useUnit } from 'effector-react'
 
+//import components
+import { $users, $filter } from '@/features/api/messages'
+import { $userId } from '@/features/api/send-message'
+
 export const MessageField = () => {
-  const userId = useUnit($userId)
-  const users = useUnit($users)
-  const filter = useUnit($filter)
+  const userId = useUnit($userId) //user id
+  const users = useUnit($users) //all users
+  const filter = useUnit($filter) // filterd users
 
   const messages = users.map((user, index) => {
     if (user.id === userId) {

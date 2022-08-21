@@ -1,13 +1,21 @@
-import s from './new-message.module.css'
-import Send from '@/assets/icons/send.svg'
-import { sendedMessage, $userId } from '@/features/api/send-message'
-import { $filter, getAllMessages } from '@/features/api/messages'
+//import modules
 import { useState, ChangeEvent } from 'react'
 import { useUnit } from 'effector-react'
 
+//import components
+import { sendedMessage, $userId } from '@/features/api/send-message'
+import { $filter, getAllMessages } from '@/features/api/messages'
+import { $joke } from '@/features/api/get-answer'
+
+//import styles
+import s from './new-message.module.css'
+import Send from '@/assets/icons/send.svg'
+
 export const NewMessage = () => {
-  const userId = useUnit($userId)
-  const filter = useUnit($filter)
+  const userId = useUnit($userId) //user id
+  const filter = useUnit($filter) //filtered users
+  const joke = useUnit($joke) //user answer
+
   const [messageValue, setMessageValue] = useState<string>('')
 
   const getMessageValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -16,13 +24,22 @@ export const NewMessage = () => {
 
   const messageSended = () => {
     getAllMessages()
-    messageValue
-      ? sendedMessage({
-          value: messageValue,
-          status: true,
+    if (messageValue) {
+      const sendJoke = setInterval(() => {
+        sendedMessage({
+          value: joke,
+          status: false,
           date: new Date().toLocaleString(),
         })
-      : null
+        getAllMessages()
+        clearInterval(sendJoke)
+      }, 7000)
+      sendedMessage({
+        value: messageValue,
+        status: true,
+        date: new Date().toLocaleString(),
+      })
+    }
     setMessageValue('')
   }
 

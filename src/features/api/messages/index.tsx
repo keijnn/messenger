@@ -7,7 +7,7 @@ const getUsersFx = createEffect(async () => {
   )
   if (!request.ok) throw request
   return request.json()
-})
+}) //get all messages
 
 export const getAllMessages = createEvent<void>()
 export const usersFiltered = createEvent<string>()
@@ -20,11 +20,9 @@ $users.map((users) => users.map((user) => user.messages.reverse()))
 
 $users.map((users) =>
   users.sort((a, b) =>
-    a.messages[0]?.date < b.messages[0]?.date ? 1 : -1
+    a.messages[0].date < b.messages[0].date ? 1 : -1
   )
 )
-
-
 
 sample({
   clock: getAllMessages,
